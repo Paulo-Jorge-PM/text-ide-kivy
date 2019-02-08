@@ -1,0 +1,9 @@
+
+compilar normal:
+gcc ./sqlite.c -o sqlite -lsqlite3
+
+
+compilar dll:
+gcc -shared -Wl,-soname,adder -o adder.so -fPIC sqlite.c -lsqlite3
+
+/* sql = "SELECT word FROM words WHERE word LIKE 'paulo%' limit 500"; */

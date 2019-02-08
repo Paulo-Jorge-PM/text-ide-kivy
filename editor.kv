@@ -1,0 +1,324 @@
+#:kivy 1.10.1
+
+#<Text@TextMain>:
+#    id: text_main
+#    font_size: '14pt'
+#    focus: True
+#    padding: 20,20,20,0
+
+<RecycleViewRow>:
+    orientation: 'vertical'
+    Button:
+        text: root.value
+        padding: 0,0
+        #on_press: app.root.message_box(root.text)
+
+Root:
+    #text_input: text_input
+
+    BoxLayout:
+        id: main_wrapper
+        orientation: 'vertical'
+
+        BoxLayout:
+            id: top_box
+            size_hint_y: None
+            height: 30
+            #spacing: 10
+
+            Button:
+                text: 'Load'
+                on_release: root.show_load()
+            Button:
+                text: 'Save'
+                on_release: root.show_save()
+
+        BoxLayout:
+            id: middle_wrapper
+            orientation: 'vertical'
+            
+            BoxLayout:             
+                id: middle_box
+                orientation: 'horizontal'
+
+                
+                Splitter:
+                    sizable_from: 'right'
+                    strip_size: '5pt'
+                    keep_within_parent: True
+                    rescale_with_parent: False
+                    
+                    size_hint_x: None 
+                    width: '300pt'
+                    #width: root.ids.tabs_left.tab_list.width
+                    
+                    min_size: '20pt'
+                    #max_size: pt(self.width)
+                    max_size: '300pt'
+
+
+                    TabbedPanel:
+                        id: tabs_left
+                        #width:pt('300')
+                        #width: '300pt'
+                        #background_color: 1, 0, 0, 1
+                        do_default_tab: False
+                        
+                        TabbedPanelItem:
+                            id: tab_words
+                            text: 'Words'
+                            bold: True
+                            RecycleView:
+                                id: list_words
+                                scroll_type: ['bars', 'content']
+                                scroll_wheel_distance: dp(114)
+                                bar_width: dp(10)
+                                viewclass: 'RecycleViewRow'
+                                RecycleBoxLayout:
+                                    default_size: None, dp(56)
+                                    default_size_hint: 1, None
+                                    size_hint_y: None
+                                    height: self.minimum_height
+                                    orientation: 'vertical'
+                                    spacing: dp(2)
+                            
+                            #RstDocument:
+                                #id: word_list
+                                #text: text_main.text
+                                #text: ''
+                                #show_errors: True
+                                
+                        TabbedPanelItem:
+                            id: tab_synonyms
+                            text: 'Synonyms'
+                            bold: True
+                            #RecycleView:
+                            ListWords:
+                                id: list_synonyms
+                                scroll_type: ['bars', 'content']
+                                scroll_wheel_distance: dp(114)
+                                bar_width: dp(10)
+                                viewclass: 'RecycleViewRow'
+                                RecycleBoxLayout:
+                                    default_size: None, dp(56)
+                                    default_size_hint: 1, None
+                                    size_hint_y: None
+                                    height: self.minimum_height
+                                    orientation: 'vertical'
+                                    spacing: dp(2)
+                                            
+                        TabbedPanelItem:
+                            id: tab_antonyms
+                            text: 'Antonyms'
+                            bold: True
+                            RecycleView:
+                                id: list_antonyms
+                                scroll_type: ['bars', 'content']
+                                scroll_wheel_distance: dp(114)
+                                bar_width: dp(10)
+                                viewclass: 'RecycleViewRow'
+                                RecycleBoxLayout:
+                                    default_size: None, dp(56)
+                                    default_size_hint: 1, None
+                                    size_hint_y: None
+                                    height: self.minimum_height
+                                    orientation: 'vertical'
+                                    spacing: dp(2)
+
+
+                TextMain:
+                #TextInput:
+                    id: text_main
+                    focus: True
+                    padding: 30,30,30,0
+                    text: ''
+                    #on_text: app.text_change(self.text)    
+                    hint_text: ' >>>'        
+                    
+                    #https://stackoverflow.com/questions/36302516/remove-kivy-text-input-boarders
+                    #border: ('0', '0', '0', '0')
+                    #foreground_color: (0, 0.5, 0, 1)
+                    #border:0,0,0,0
+                    #background_color: 1,1,1,1
+                    #foreground_color: 0,1,1,0.7
+
+            Splitter:
+                sizable_from: 'top'
+                strip_size: '5pt'
+                keep_within_parent: True
+                rescale_with_parent: True
+
+                BoxLayout:
+                    id: middle_bottom_box
+                    orientation: 'vertical'
+
+                    #canvas:
+                    #    Color:
+                    #        rgba: 0.5, 1, 0.5, 1
+                    #    Rectangle:
+                    #        pos: self.pos
+                    #        size: self.size
+                            
+                    StackLayout:
+                        id: middle_bottom_menus
+                        orientation: 'lr-tb'
+                        size_hint_y: None
+                        height: 50
+                        padding: 20,10
+                        spacing: 10
+                        
+                        canvas:
+                            Color:
+                                #rgba: 0.7, 0.7, 0.7, 1
+                                rgba: 0.8, 0.8, 0.8, 1
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size
+                                    
+                        Button:
+                            size_hint: None, None
+                            size: 100,30
+                            color: 1, 1, 1, 1
+                            bold: True
+                            text: 'Morphology'
+
+                        Button:
+                            size_hint: None, None
+                            size: 100,30
+                            color: 1, 1, 1, 1
+                            bold: True
+                            text: 'Syntax'
+                            
+                        Button:
+                            size_hint: None, None
+                            size: 100,30
+                            color: 1, 1, 1, 1
+                            bold: True
+                            text: 'Semantics'
+                            
+                        Button:
+                            size_hint: None, None
+                            size: 100,30
+                            color: 1, 1, 1, 1
+                            bold: True
+                            text: 'Translation'
+                            
+                        Button:
+                            size_hint: None, None
+                            size: 100,30
+                            color: 1, 1, 1, 1
+                            bold: True
+                            text: 'Statistics'
+                            
+                            
+                    BoxLayout:
+                        RstDocument:
+                            id: middle_bottom_content
+                            background_color: 0.5, 1, 0.5, 1
+                            #text: 'Test'
+                
+                            
+                            
+        StackLayout:
+            id: bottom_box
+            orientation: 'lr-tb'
+            size_hint_y: None
+            height: 30
+            
+            canvas:
+                Color:
+                    rgba: 0.7, 0.7, 0.7, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            #StackLayout:
+            #    orientation: 'lr-tb'
+           
+            Button:
+                size_hint:None, None
+                size:100,30
+                color: 1, 1, 1, 1
+                bold: True
+                text: 'Words'
+                #on_press: root.word_count()
+                on_press: app.word_count()
+            Button:
+                size_hint:None, None
+                size:100,30
+                color: 1, 1, 1, 1
+                bold: True
+                text: 'Characters'
+            Button:
+                size_hint:None, None
+                size:100,30
+                color: 1, 1, 1, 1
+                bold: True
+                text: 'Paragraphs'
+            Label:
+                size_hint:None, None
+                color: 0, 0, 0, 1
+                size: self.texture_size
+                padding: 10,7
+                #text_size: self.size
+                halign: 'left'
+                valign: 'top'
+                text: '   Words:'
+            Label:
+                size_hint:None, None
+                color: 0, 0, 0, 1
+                size: self.texture_size
+                #text_size: self.size.width,30
+                padding: 10,7
+                #text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+                text: '|    Characters:'
+                
+
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserIconView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load(filechooser.path, filechooser.selection)
+
+<SaveDialog>:
+    text_input: text_input
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+            on_selection: text_input.text = self.selection and self.selection[0] or ''
+
+        TextInput:
+            id: text_input
+            size_hint_y: None
+            height: 30
+            multiline: False
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Save"
+                on_release: root.save(filechooser.path, text_input.text)
+
