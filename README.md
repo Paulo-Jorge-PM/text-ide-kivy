@@ -4,6 +4,12 @@ Personal project: programming a text IDE for linguistics purposes. My aim is to 
 
 ---
 
+## Want to run this?
+
+You'll need: Python 3 and Kivy installed. The file "main.py" starts the application. Take notice that there is a lot of commented code for testing purposes and bugs, it is far away from finished. If I release this one day I'll compile executables and clean the code, until then this is just for study purposes (it is open-source, don't care about licenses) and I take no responsability on how you use this.
+
+---
+
 ## Contact me:
 
 [http://www.paulojorgepm.net](http://www.paulojorgepm.net)
