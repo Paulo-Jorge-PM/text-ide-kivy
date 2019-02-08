@@ -1,45 +1,9 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+## Linguistic IDE
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
-
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
+Personal project: programming a text IDE for linguistics purposes. My aim is to create a text editor kind of software, but focusing only in the linguistics (academic aspect), analyzing in real time stuff like grammar, morphology, corpora techniques, statistics, automatic translation, sintax, semantics, etc. Ideally it will have a parallel website, where academics/public can update the database and contribute with updates or new plugins. I plan to integrate the NLTK library with it and do cool stuff like sintatic trees, etc. I don't have as much free time as I would like to, so it has been a very slow development and it has a long long way to go (I am always jumping from stuff to stuff), but one day I hope to finish this. I started it in Javascript, then jumped to Tkinter, later to Pyglet, but now I am using Kivy and some C for performance. I keep changing it for many reasons (performance, new interests, or changed my objectives midway - at the beginning wanted a simple web-app, now want a full fledge desktop software, etc.). I have been doing this also to study new libraries - since I want to stick my study to Python and Kivy for now, I have been using it, but ideally in the future would like to port it and remake it with a faster language, ideally Rust (want to master and try it for some time). At the moment it only has word autocomplete and some layout functionality, I used Radix Trees ("Patricia trie") for that. When I finish new functions and test them I'll add new content, but for now there is a long run ahead, it is only a prototype pre-pre-pre-alfa.
 
 ---
 
-## Edit a file
+## Contact me:
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
-
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
-
----
-
-## Create a file
-
-Next, you’ll add a new file to this repository.
-
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
-
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
-
----
-
-## Clone a repository
-
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
-
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
-
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+[http://www.paulojorgepm.net](http://www.paulojorgepm.net)
