@@ -29,6 +29,20 @@ from config import config
 #WORD = ''
 #PARAGRAPH = ''
 
+###NOTE: projeto em desenvolvimento, protótipo. Não terminado.
+#A lot of commented code because ongoing work and stuff to test later. Summary of the commented code evolution:
+#The words database was imported from the PT Firefox public dictionary
+#Innitialy had the words in csv, later in sqlite, but the autocomeplte code was to slow while typing,
+#Tryed to load all the sqlite database in RAM 1st, but still was not fast enough
+#So tryed the sqlite part in C, but still was slow,
+#TAfter tyed multithreading and multiprocessing, better but not perfect yet.
+#So later gave up on sqlite and adapted it to Patrician Tries (Radix Tree), using a C library, and worked like a charm
+#To do: add multithreading to Patrician Trie so it goes even faster?
+#To do: repeat for synonims and antonims. After start working on the bottom panel linguistics functions
+#To do: design a real GUI template, the present one is ugly for test purposes only
+
+#TO DO
+#quando palavra não existe dá um Error in sys.excepthook na consola. não interfere nem crasha, mas convém limpar isso
 
 db_path = os.path.join('databases', config.language)
 db_words_path = os.path.join(db_path, 'words.sqlite')
@@ -36,23 +50,20 @@ db_words_path = os.path.join(db_path, 'words.sqlite')
 db = databases.Database(db_words_path)
 trie = tries.Trie(db.words())
 
+
 """import ctypes
 from ctypes import *
 
 adder = CDLL('./adder.so')"""
 
-#TO DO
-#quando palavra não existe dá um Error in sys.excepthook na consola. não interfere nem crasha, mas convém limpar isso
-
-
-
 #db = databases.Databases()
 
 #pragmas = [ ('journal_mode', 'wal'), ('cache_size', -1000 * 32)]
 
-### FIXED CONFIGURATIONS FOR AN EXTERNAL FILE ###
+### TO DO FIXED CONFIGURATIONS IN AN EXTERNAL FILE ###
 #language = 'pt-pt'
 
+#sqlite 1st version, moved to external file. delete if patrician tries work better
 """
 class databases():
 
@@ -296,6 +307,8 @@ class TextMain(TextInput):
         #data = [{'value': x} for x in words if x.startswith(word) and word]
         #for w in words:
         #    print('a')
+
+        #Dont want to autocomplete one letter to words, only ater 2 letters:
         if len(word) > 1:
             #print(11111111)
             #words = db.get_words(word)
@@ -313,7 +326,7 @@ class TextMain(TextInput):
         #print(WORD)
         #return data
 
-    #code from on_double_tap()
+    #code adapted from on_double_tap() function
     def select_word(self):
         ci = self.cursor_index()
         cc = self.cursor_col
