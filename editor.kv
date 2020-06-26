@@ -1,21 +1,6 @@
 #:kivy 1.10.1
 
-#<Text@TextMain>:
-#    id: text_main
-#    font_size: '14pt'
-#    focus: True
-#    padding: 20,20,20,0
-
-<RecycleViewRow>:
-    orientation: 'vertical'
-    Button:
-        text: root.value
-        padding: 0,0
-        #on_press: app.root.message_box(root.text)
-
 Root:
-    #text_input: text_input
-
     BoxLayout:
         id: main_wrapper
         orientation: 'vertical'
@@ -64,16 +49,27 @@ Root:
                         #background_color: 1, 0, 0, 1
                         do_default_tab: False
                         
+                        canvas:
+                            Color:
+                                #rgba: 0.7, 0.7, 0.7, 1
+                                rgba: 0.8, 0.8, 0.8, 1
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size
+
                         TabbedPanelItem:
                             id: tab_words
                             text: 'Words'
                             bold: True
+                            on_press: root.ids.text_main.get_words(root.ids.text_main.word)
                             RecycleView:
+                                #viewclass: 'Autocomplete'
                                 id: list_words
                                 scroll_type: ['bars', 'content']
                                 scroll_wheel_distance: dp(114)
                                 bar_width: dp(10)
                                 viewclass: 'RecycleViewRow'
+                                #on_touch_down: print(self.data)
                                 RecycleBoxLayout:
                                     default_size: None, dp(56)
                                     default_size_hint: 1, None
@@ -81,19 +77,14 @@ Root:
                                     height: self.minimum_height
                                     orientation: 'vertical'
                                     spacing: dp(2)
-                            
-                            #RstDocument:
-                                #id: word_list
-                                #text: text_main.text
-                                #text: ''
-                                #show_errors: True
+
                                 
                         TabbedPanelItem:
                             id: tab_synonyms
                             text: 'Synonyms'
                             bold: True
-                            #RecycleView:
-                            ListWords:
+                            on_press: root.ids.text_main.get_synonyms(root.ids.text_main.word)
+                            RecycleView:
                                 id: list_synonyms
                                 scroll_type: ['bars', 'content']
                                 scroll_wheel_distance: dp(114)
@@ -111,6 +102,7 @@ Root:
                             id: tab_antonyms
                             text: 'Antonyms'
                             bold: True
+                            on_press: root.ids.text_main.get_antonyms(root.ids.text_main.word)
                             RecycleView:
                                 id: list_antonyms
                                 scroll_type: ['bars', 'content']
@@ -126,21 +118,25 @@ Root:
                                     spacing: dp(2)
 
 
-                TextMain:
-                #TextInput:
-                    id: text_main
-                    focus: True
-                    padding: 30,30,30,0
-                    text: ''
-                    #on_text: app.text_change(self.text)    
-                    hint_text: ' >>>'        
-                    
-                    #https://stackoverflow.com/questions/36302516/remove-kivy-text-input-boarders
-                    #border: ('0', '0', '0', '0')
-                    #foreground_color: (0, 0.5, 0, 1)
-                    #border:0,0,0,0
-                    #background_color: 1,1,1,1
-                    #foreground_color: 0,1,1,0.7
+                ScrollView:
+                    id: scroll_text
+                    scroll_type: ['bars']
+                    scroll_wheel_distance: dp(114)
+                    bar_width: dp(10)
+                    #size_hint: 0.2, 0.2
+                    bar_color: [0.658, 0.658, 0.658, 1]
+                    bar_inactive_color: [0.756, 0.756, 0.756, 1]
+                    TextMain:
+                        id: text_main
+                        text: ''
+                        hint_text: ' >>>'
+                        focus: True
+                        adding: 30,30,30,0
+                        size_hint: 1, None
+                        #size_hint_y: None
+                        height: max(self.minimum_height, scroll_text.height)
+                        on_cursor_row: self.change_scroll_y(text_main, scroll_text)
+
 
             Splitter:
                 sizable_from: 'top'
@@ -148,74 +144,144 @@ Root:
                 keep_within_parent: True
                 rescale_with_parent: True
 
-                BoxLayout:
-                    id: middle_bottom_box
-                    orientation: 'vertical'
+                TabbedPanel:
+                    id: tabs_info_panel
+                    #width:pt('300')
+                    #width: '300pt'
+                    #background_color: 1, 0, 0, 1
+                    do_default_tab: False
 
-                    #canvas:
-                    #    Color:
-                    #        rgba: 0.5, 1, 0.5, 1
-                    #    Rectangle:
-                    #        pos: self.pos
-                    #        size: self.size
-                            
-                    StackLayout:
-                        id: middle_bottom_menus
-                        orientation: 'lr-tb'
-                        size_hint_y: None
-                        height: 50
-                        padding: 20,10
-                        spacing: 10
-                        
-                        canvas:
-                            Color:
-                                #rgba: 0.7, 0.7, 0.7, 1
-                                rgba: 0.8, 0.8, 0.8, 1
-                            Rectangle:
-                                pos: self.pos
-                                size: self.size
-                                    
-                        Button:
-                            size_hint: None, None
-                            size: 100,30
-                            color: 1, 1, 1, 1
-                            bold: True
-                            text: 'Morphology'
-
-                        Button:
-                            size_hint: None, None
-                            size: 100,30
-                            color: 1, 1, 1, 1
-                            bold: True
-                            text: 'Syntax'
-                            
-                        Button:
-                            size_hint: None, None
-                            size: 100,30
-                            color: 1, 1, 1, 1
-                            bold: True
-                            text: 'Semantics'
-                            
-                        Button:
-                            size_hint: None, None
-                            size: 100,30
-                            color: 1, 1, 1, 1
-                            bold: True
-                            text: 'Translation'
-                            
-                        Button:
-                            size_hint: None, None
-                            size: 100,30
-                            color: 1, 1, 1, 1
-                            bold: True
-                            text: 'Statistics'
-                            
-                            
-                    BoxLayout:
-                        RstDocument:
-                            id: middle_bottom_content
+                    canvas:
+                        Color:
+                            #rgba: 0.7, 0.7, 0.7, 1
+                            rgba: 0.8, 0.8, 0.8, 1
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                    
+                    TabbedPanelItem:
+                        id: info
+                        text: 'Current'
+                        bold: True
+                        #on_press: root.ids.text_main.get_words(root.ids.text_main.word)
+                        InfoPanel
+                            id: info_panel
+                            scroll_type: ['bars']
+                            scroll_wheel_distance: dp(114)
+                            bar_width: dp(10)
+                            bar_color: [0.658, 0.658, 0.658, 1]
+                            bar_inactive_color: [0.756, 0.756, 0.756, 1]
                             background_color: 0.5, 1, 0.5, 1
-                            #text: 'Test'
+
+                    TabbedPanelItem:
+                        id: dictionary
+                        text: 'Dictionary'
+                        bold: True
+                        on_press: root.ids.dictionary_panel.check(root.ids.text_main.word, root.config.lang)
+                        DictionaryPanel
+                            id: dictionary_panel
+                            scroll_type: ['bars']
+                            scroll_wheel_distance: dp(114)
+                            bar_width: dp(10)
+                            bar_color: [0.658, 0.658, 0.658, 1]
+                            bar_inactive_color: [0.756, 0.756, 0.756, 1]
+                            background_color: 0.5, 1, 0.5, 1
+
+                    TabbedPanelItem:
+                        id: spellcheck
+                        text: 'Spellcheck'
+                        bold: True
+                        on_press: root.ids.spellcheck_panel.check(root.ids.text_main.phrase, root.config.lang)
+                        SpellcheckPanel
+                            id: spellcheck_panel
+                            scroll_type: ['bars']
+                            scroll_wheel_distance: dp(114)
+                            bar_width: dp(10)
+                            bar_color: [0.658, 0.658, 0.658, 1]
+                            bar_inactive_color: [0.756, 0.756, 0.756, 1]
+                            background_color: 0.5, 1, 0.5, 1
+
+                    TabbedPanelItem:
+                        id: morphology
+                        text: 'Morphology'
+                        bold: True
+                        on_press: root.ids.morphology_panel.check(root.ids.text_main.phrase, root.config.lang)
+                        MorphologyPanel
+                            id: morphology_panel
+                            scroll_type: ['bars']
+                            scroll_wheel_distance: dp(114)
+                            bar_width: dp(10)
+                            bar_color: [0.658, 0.658, 0.658, 1]
+                            bar_inactive_color: [0.756, 0.756, 0.756, 1]
+                            background_color: 0.5, 1, 0.5, 1
+
+                    TabbedPanelItem:
+                        id: sintaxe
+                        text: 'Sintaxe'
+                        bold: True
+                        on_press: root.ids.sintaxe_panel.check(root.ids.text_main.phrase, root.config.lang)
+                        SintaxePanel
+                            id: sintaxe_panel
+                            scroll_type: ['bars']
+                            scroll_wheel_distance: dp(114)
+                            bar_width: dp(10)
+                            bar_color: [0.658, 0.658, 0.658, 1]
+                            bar_inactive_color: [0.756, 0.756, 0.756, 1]
+                            #background_color: 0.5, 1, 0.5, 1
+                            canvas.before:
+                                Color:
+                                    rgba: 0.5, 1, 0.5, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+
+                    TabbedPanelItem:
+                        id: sentiment
+                        text: 'Sentiment'
+                        bold: True
+                        on_press: root.ids.sentiment_panel.check(root.ids.text_main.phrase, root.config.lang)
+                        SentimentPanel
+                            id: sentiment_panel
+                            scroll_type: ['bars']
+                            scroll_wheel_distance: dp(114)
+                            bar_width: dp(10)
+                            bar_color: [0.658, 0.658, 0.658, 1]
+                            bar_inactive_color: [0.756, 0.756, 0.756, 1]
+                            #background_color: 0.5, 1, 0.5, 1
+                            canvas.before:
+                                Color:
+                                    rgba: 0.5, 1, 0.5, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+
+                    TabbedPanelItem:
+                        id: translation
+                        text: 'Translation'
+                        bold: True
+                        on_press: root.ids.translation_panel.check(root.ids.text_main.phrase, root.config.lang)
+                        TranslationPanel
+                            id: translation_panel
+                            scroll_type: ['bars']
+                            scroll_wheel_distance: dp(114)
+                            bar_width: dp(10)
+                            bar_color: [0.658, 0.658, 0.658, 1]
+                            bar_inactive_color: [0.756, 0.756, 0.756, 1]
+                            background_color: 0.5, 1, 0.5, 1
+
+                    TabbedPanelItem:
+                        id: statistics
+                        text: 'Statistics'
+                        bold: True
+                        on_press: root.ids.statistics_panel.check(root.ids.text_main.text, root.config.lang)
+                        StatisticsPanel
+                            id: statistics_panel
+                            scroll_type: ['bars']
+                            scroll_wheel_distance: dp(114)
+                            bar_width: dp(10)
+                            bar_color: [0.658, 0.658, 0.658, 1]
+                            bar_inactive_color: [0.756, 0.756, 0.756, 1]
+                            background_color: 0.5, 1, 0.5, 1
                 
                             
                             
@@ -241,39 +307,41 @@ Root:
                 color: 1, 1, 1, 1
                 bold: True
                 text: 'Words'
-                #on_press: root.word_count()
-                on_press: app.word_count()
+                on_press: root.ids.statistics_panel.WordCount(root.ids.text_main.text)
+                #on_press: app.word_count()
             Button:
                 size_hint:None, None
                 size:100,30
                 color: 1, 1, 1, 1
                 bold: True
                 text: 'Characters'
+                on_press: root.ids.statistics_panel.CharactersCount(root.ids.text_main.text)
             Button:
                 size_hint:None, None
                 size:100,30
                 color: 1, 1, 1, 1
                 bold: True
                 text: 'Paragraphs'
-            Label:
-                size_hint:None, None
-                color: 0, 0, 0, 1
-                size: self.texture_size
-                padding: 10,7
-                #text_size: self.size
-                halign: 'left'
-                valign: 'top'
-                text: '   Words:'
-            Label:
-                size_hint:None, None
-                color: 0, 0, 0, 1
-                size: self.texture_size
-                #text_size: self.size.width,30
-                padding: 10,7
-                #text_size: self.size
-                halign: 'left'
-                valign: 'middle'
-                text: '|    Characters:'
+                on_press: root.ids.statistics_panel.PragraphCount(root.ids.text_main.text)
+#            Label:
+#                size_hint:None, None
+#                color: 0, 0, 0, 1
+#                size: self.texture_size
+#                padding: 10,7
+#                #text_size: self.size
+#                halign: 'left'
+#                valign: 'top'
+#                text: '   Words:'
+#            Label:
+#                size_hint:None, None
+#                color: 0, 0, 0, 1
+#                size: self.texture_size
+#                #text_size: self.size.width,30
+#                padding: 10,7
+#                #text_size: self.size
+#                halign: 'left'
+#                valign: 'middle'
+#                text: '|    Characters:'
                 
 
 <LoadDialog>:
@@ -322,3 +390,10 @@ Root:
                 text: "Save"
                 on_release: root.save(filechooser.path, text_input.text)
 
+<RecycleViewRow>:
+    orientation: 'vertical'
+    Button:
+        text: root.value
+        padding: 0,0
+        on_press: app.root.ids.text_main.updateWord(self.text)
+        on_release: app.root.ids.text_main.focus = True
