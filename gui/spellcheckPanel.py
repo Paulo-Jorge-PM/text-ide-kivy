@@ -55,9 +55,9 @@ class SpellcheckPanel(RstDocument):
                 checked += w['original'] + ' '
                 #checked += '\[color\=#00FF00\]' + w['original'] + '\[\/color\]'
             else:
-                red = '\[color\=#ff0000\]' + w['original'] + '\[\/color\]'
+                red = ' [color=#ff0000] ' + w['original'] + ' [/color] '
                 original = original.replace(w['original'], red)
-                checked += '\[b\]' + w['corrected'] + '\[\/b\] '
+                checked += ' [b] ' + w['corrected'] + ' [/b] '
                 alternatives += w['original'] + ': ' + ' / '.join(w['candidates'])[2:] + '''\n
     '''
 

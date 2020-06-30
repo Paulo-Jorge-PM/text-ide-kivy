@@ -240,7 +240,7 @@ class Editor(App):
 
 ### GUI
 #TextMain = TextMain()
-#InfoPanel = InfoPanel()
+#InfoPanel = InfoPanel()ee  ano
 
 #O Factory regista classes para que possam ser usadas diretamente no kv. Útil para fazer um sub-class e manipular aqui 1º antes de definir no kv
 Factory.register('Root', cls=Root)
