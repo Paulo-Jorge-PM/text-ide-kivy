@@ -1,6 +1,6 @@
 ## Linguistic IDE
 
-![screenshot](http://www.paulojorgepm.net/static/images/print_linguistic_ide.png)
+![screenshot](print_linguistic_ide.png)
 
 Text IDE for linguistics purposes. Objective: to create a text editor software, but focusing only in the linguistics (academic aspect), not visual aspects like the traditional ones, analyzing in real time linguistics aspects like grammar, morphology, corpora techniques, statistics, automatic translation, syntax, semantics, etc. Ideally it will have a parallel website, where academics/public can update the database and contribute with updates or new plugins. In the future I plan to migrate sobre libraries to Rust language and integrate part in Rust (faster).
 
