@@ -1,0 +1,10 @@
+
+Corer o run.sh
+
+Mas primeiro correr no terminal Linux:
+xhost +
+
+NOTA: isto tem problemas de segurança, permite a todos aceder ao meu X Server (monitor etc.)
+
+Depois de correr a app desligar este acesso geral (e permitir só aos users) com:
+xhost -

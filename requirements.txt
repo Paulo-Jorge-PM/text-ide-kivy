@@ -1,16 +1,8 @@
-
-Python3+
-
-And the folowing libraries:
-kivy (see here for installation instructions and dependencies: https://kivy.org/#download)
+numpy
 nltk
-pickle
-pip install marisa-trie
-pip install googletrans
-pip install pyspellchecker
-pip install nlpnet
-pip3 install bllipparser
-pip install -U textblob
-
-Note: I added already the main corpora needed to the "/data" folder, and added the PATH to the global variabls of the app, so I think it should not be ncessary to install more corpora packages. But if NLTK asks for corpora use the instructions on the command line (nltk.download(xxx) ); if TextBlob asks for corpora use:
-python -m textblob.download_corpora
+marisa-trie
+googletrans
+pyspellchecker
+nlpnet
+bllipparser
+textblob
